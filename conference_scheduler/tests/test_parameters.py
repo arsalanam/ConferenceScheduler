@@ -12,6 +12,12 @@ def test_session_array(sessions):
                                                    [0, 0, 0, 0, 0, 1, 0],
                                                    [0, 0, 0, 0, 0, 0, 1]]))
 
+def test_availability_array(events, slots):
+    availability_array = parameters.availability_array(events, slots)
+    assert np.array_equal(session_array, np.array([[0, 0, 1, 1, 1, 1, 1],
+                                                   [1, 1, 0, 0, 1, 1, 1],
+                                                   [1, 1, 1, 1, 1, 1, 1]]))
+
 def test_variables(shape):
     X = parameters.variables(shape)
     assert len(X) == 21
