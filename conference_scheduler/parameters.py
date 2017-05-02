@@ -40,6 +40,20 @@ def session_array(sessions):
             array[row, all_slots.index(slot)] = 1
     return array
 
+def availability_array(events, slots):
+    """
+    Return a numpy array mapping events to slots
+
+    - Rows corresponds to events
+    - Columns correspond to stags
+    """
+    array = np.ones((len(events), len(slots)))
+    for row, event in enumerate(events):
+        for col, slot in enumerate(slots):
+            if slot in event.unavailability:
+                array[row, col] = 0
+    return array
+
 def _schedule_all_events(shape, X):
     for event in range(shape.events):
         yield sum(X[event, slot] for slot in range(shape.slots)) == 1
